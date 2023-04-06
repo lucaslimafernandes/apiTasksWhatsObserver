@@ -7,3 +7,5 @@ e-mail: lucas.lfernandes@live.com
 
 Estudo de uso do design pattern Observer
 
+## Run
+uvicorn main:app --reload
