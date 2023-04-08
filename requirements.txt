@@ -1,1 +1,3 @@
-fastapi[all]
+#fastapi[all]
+flask
+#mod_wsgi
