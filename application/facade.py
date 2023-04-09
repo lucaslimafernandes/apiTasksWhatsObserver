@@ -1,6 +1,7 @@
 import requests
 import settings
 import json
+from typing import Dict
 
 #lat = settings.LAT_LONG['casa'][0]
 #lon = settings.LAT_LONG['casa'][1]
@@ -20,14 +21,23 @@ class Facade:
     def __init__(self) -> None:
         pass
     
+    
     def clima(self):
         ow = OpenWeather()
         res = ow.clima().decode()
-        print(res)
-        print(type(res))
-        print(json.loads(res))
-        print(type(json.loads(res)))   
-        return json.loads(res)
+        return self.create_dict(json.loads(res))
+    
+
+    def create_dict(self, dados) -> Dict:
+
+        response = {
+            'cidade': dados['name'],
+            'clouds': dados['weather'][0]['description'],
+            'main': dados['main'],
+            'wind': dados['wind']['speed']
+        }
+        return response
+        
         
 
 
