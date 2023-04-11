@@ -7,33 +7,21 @@ e-mail: lucas.lfernandes@live.com
 
 Estudo de uso do design pattern Observer
 
-## Run
-uvicorn main:app --reload
+## Settings
 
+Seguir os passos encontrados em: https://www.callmebot.com/blog/free-api-whatsapp-messages/
+
+## Run
+Para testes:
+>> uvicorn main:app --reload
+
+Para deploy:
+>> nohup uvicorn main:app --host 0.0.0.0 --port 5000
 
 ## Setting up OCI
 
-update firewall settings
->> sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT
-sudo netfilter-persistent save
+seguir os passos em install.sh ou tentar executar no bash
 
-python
->>sudo apt update
->>sudo apt install -y python3-pip
->>pip3 install virtualenv
->>pip3 install virtualenvwrapper
-
-venv wrapper
->> sudo nano .bashrc
-# set up Python env
-export WORKON_HOME=~/envs
-export PATH=$PATH:/home/ubuntu/.local/bin
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
-source /home/ubuntu/.local/bin/virtualenvwrapper.sh
-
->>source ~/.bashrc
-
-and install project
-
+referências:
+https://fastapi.tiangolo.com/deployment/manually/
 https://docs.oracle.com/en-us/iaas/developer-tutorials/tutorials/flask-on-ubuntu/01oci-ubuntu-flask-summary.htm
