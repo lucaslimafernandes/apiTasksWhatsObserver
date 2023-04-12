@@ -2,7 +2,6 @@ from fastapi import FastAPI, Header
 from typing import Union, List
 from typing_extensions import Annotated
 import settings
-import requests
 from application.observer import Assunto, WPP
 from application.facade import ClientWeather
 from hashlib import sha256
@@ -16,7 +15,7 @@ async def root():
 
 
 @app.get('/me/{message}')
-async def sender(message:str) -> None:
+async def sender(message:str) -> dict:
     ins = Assunto()
     WPP(ins)
     ins.add_noticia(message)
