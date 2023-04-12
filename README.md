@@ -83,7 +83,9 @@ Para rodar o projeto em algum servidor linux
 seguir os passos em install.sh ou tentar executar no bash
 
 referências:
+
 https://fastapi.tiangolo.com/deployment/manually/
+
 https://docs.oracle.com/en-us/iaas/developer-tutorials/tutorials/flask-on-ubuntu/01oci-ubuntu-flask-summary.htm
 
 
