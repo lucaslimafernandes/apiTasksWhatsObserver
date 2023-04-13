@@ -1,0 +1,13 @@
+[Unit]
+Description=apiTasksWhatsObserver
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/apiTasksWhatsObserver/
+TasksMax=20
+ExecStart=bash /home/ubuntu/apiTasksWhatsObserver/run.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
