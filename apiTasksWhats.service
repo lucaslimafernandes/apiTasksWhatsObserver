@@ -2,11 +2,11 @@
 Description=apiTasksWhatsObserver
 
 [Service]
-User=ubuntu
+User=username
 Group=www-data
-WorkingDirectory=/home/ubuntu/apiTasksWhatsObserver/
+WorkingDirectory=/home/username/apiTasksWhatsObserver/
 TasksMax=20
-ExecStart=bash /home/ubuntu/apiTasksWhatsObserver/run.sh
+ExecStart=bash /home/username/apiTasksWhatsObserver/run.sh
 Restart=always
 
 [Install]

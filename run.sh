@@ -1,5 +1,5 @@
 #!/bin/bash
 
-source /home/ubuntu/apiTasksWhatsObserver/ambiente/bin/activate
-cd /home/ubuntu/apiTasksWhatsObserver/
+source /home/username/apiTasksWhatsObserver/ambiente/bin/activate
+cd /home/username/apiTasksWhatsObserver/
 uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4

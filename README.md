@@ -31,30 +31,42 @@ por fim, para adicionar uma segurança a mais, salve um hash SHA256 de uma senha
 
 para gerar está hash, basta executar o arquivo criar_tk.py
 
+Tomar cuidado com os caminhos das pastas 
+
 
 ## Setting up local (Linux)
 
->sudo apt update
->sudo apt install -y python3-pip
->sudo apt install -y python3-venv
+    sudo apt update
 
->git clone https://github.com/lucaslimafernandes/apiTasksWhatsObserver.git
->cd apiTasksWhatsObserver
+    sudo apt install -y python3-pip
 
->python
->python3 -m venv ambiente
->source ambiente/bin/activate
+    sudo apt install -y python3-venv
 
->python -m pip install --upgrade pip
->pip install -r requirements
+    git clone https://github.com/lucaslimafernandes/apiTasksWhatsObserver.git
+
+    cd apiTasksWhatsObserver
+
+    python
+
+    python3 -m venv ambiente
+
+    source ambiente/bin/activate
+
+    python -m pip install --upgrade pip
+
+    pip install -r requirements
 
 
 ## Run
 Para testes ou execução local:
+
 > uvicorn main:app --reload
 
 Para deploy:
+
 > nohup uvicorn main:app --host 0.0.0.0 --port 5000
+
+ou via service (apiTasksWhats.service)
 
 
 ## Execução
@@ -73,7 +85,7 @@ e navegar pelas rotas
 
     ou via alguma plataforma de desenvolvimento de API - Recomento Insomnia ou Postman
 
-    também existem opções para Android, basta buscar por API Checker. 
+também existem opções para Android, basta buscar por API Tester. 
 
 
 ## Setting up VPS
