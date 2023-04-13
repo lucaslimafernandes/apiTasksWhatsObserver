@@ -7,6 +7,17 @@ e-mail: lucas.lfernandes@live.com
 
 Estudo de uso do design pattern Observer e Façade
 
+ao realizar a chamada ao endpoint /clima/ recebo a seguinte resposta no whatsapp: 
+
+    [Cidade: Qualquer
+    Nuvens: chuva moderada
+    Temperatura: 22.49
+    Sensação Térmica: 23.77
+    Mínima: 21.18
+    Máxima: 23.05
+    Humidade: 87
+    Vento: 3.6]
+
 ## Settings
 
 renomear o arquivo settings_model.py para settings.py
