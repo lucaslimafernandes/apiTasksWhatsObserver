@@ -8,3 +8,5 @@ LAT_LONG = {
             }
 
 TK = 'headerrrr'
+
+DB_DIR = '/home/projeto/crons.db'
