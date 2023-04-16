@@ -1,7 +1,8 @@
+import settings
+from application import cron_service
 from fastapi import FastAPI, Header
 from typing import Union, List
 from typing_extensions import Annotated
-import settings
 from application.observer import Assunto, WPP
 from application.facade import ClientWeather
 from hashlib import sha256
@@ -40,6 +41,14 @@ async def clima(x_token: Annotated[Union[List[str], None], Header()] = None) -> 
             return res
     except:
         return {'Error': 'Please, contact admnistrator!'}
+
+
+@app.get('/alarmes/')
+async def alarmes():
+
+    res = cron_service.show_alarmes()
+    #res = 'aaa'
+    return res
 
 
 @app.get('/teste/')
