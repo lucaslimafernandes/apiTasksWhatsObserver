@@ -1,0 +1,13 @@
+[Unit]
+Description=apiTasksWhatsObserver
+
+[Service]
+User=username
+Group=www-data
+WorkingDirectory=/home/username/apiTasksWhatsObserver/
+TasksMax=20
+ExecStart=source /home/username/apiTasksWhatsObserver/venv/bin/activate && python3 /home/username/apiTasksWhatsObserver/application/cron_service.py 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

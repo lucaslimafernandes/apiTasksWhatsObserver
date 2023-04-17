@@ -51,6 +51,34 @@ async def alarmes():
     return res
 
 
+@app.get('/alarmes/new/')
+async def alarmes_new(nome:str='alarme', message:str='Alarme',
+                    minute:int=999, hour:int=999, day:int=999,
+                    month:int=999, day_week:int=999, unique_execute:bool=False):
+    
+    item = {
+        'nome'      : nome,
+        'message'   : message,
+        'c_minute'  : minute,
+        'c_hour'    : hour,
+        'c_day'     : day,
+        'c_month'   : month,
+        'c_day_week': day_week,
+        'unique_execute': unique_execute
+    }
+
+    res = cron_service.new_alarm(item)
+    return f'Item inserido - id: {res}'
+    
+@app.get('/alarmes/delete/{item_id}')
+async def alarmes_delete(item_id:int):
+
+    res = cron_service.delete_alarm(item_id)
+
+    return res
+
+
+
 @app.get('/teste/')
 async def teste(x_token: Annotated[Union[List[str], None], Header()] = None):
 

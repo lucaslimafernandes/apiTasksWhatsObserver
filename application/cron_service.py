@@ -25,7 +25,8 @@ def show_alarmes():
     sql = """
         select
             c.id, c.nome, c.message, 
-            c.c_minute , c.c_hour , c.c_day , c.c_month , c.c_day_week
+            c.c_minute , c.c_hour , c.c_day , c.c_month , c.c_day_week ,
+            c.unique_execute
         from crons c
     """
     response = cur.execute(sql).fetchall()
@@ -49,27 +50,54 @@ def show_alarmes_s(date):
     return response
 
 
+def new_alarm(item):
+    sql = """
+        INSERT into crons (nome, message, c_minute, c_hour, c_day, c_month, c_day_week, unique_execute)
+        values (?, ?, ?, ?, ?, ?, ?, ?);
+    """
+    try:
+        response = cur.execute(sql, (
+            item['nome'], 
+            item['message'], 
+            item['c_minute'], 
+            item['c_hour'],
+            item['c_day'],
+            item['c_month'],
+            item['c_day_week'],
+            item['unique_execute']
+            ))
+        connection.commit()
+        return response.lastrowid
+    except sqlite3.OperationalError as err:
+        return f'Error: {err}'
 
-def _check(item):
-    #cid = item['id']
-    #cnome = item['nome']
-    #cmessage = item['message']
-    #c_minute = item['c_minute']
-    #c_hour = item['c_hour']
-    #c_day = item['c_day']
-    #c_month = item['c_month']
-    #c_day_week = item['c_day_week']
 
-    return {
-        'cid': item['id'],
-        'cnome': item['nome'],
-        'cmessage': item['message'],
-        'c_minute': item['c_minute'],
-        'c_hour': item['c_hour'],
-        'c_day': item['c_day'],
-        'c_month': item['c_month'],
-        'c_day_week': item['c_day_week']
-    }
+def delete_alarm(item_id):
+    sql = """
+        delete from crons where id = ? ;
+    """
+    try:
+        cur.execute(sql, (item_id, ))
+        connection.commit()
+        return f'Alarme id: {item_id} deletado!'
+    except sqlite3.OperationalError as err:
+        return f'Error: {err}'
+
+
+
+def update_alarm(item):
+    sql = """
+        update crons
+        set last_execute = ? 
+        where id = ? ; 
+    """
+    try:
+        cur.execute(sql, (item['last_execute'], item['id'], ))
+        connection.commit()
+        #return f'Alarme id: {item_id} update!'
+    except sqlite3.OperationalError as err:
+        return f'Error: {err}'
+
 
 
 def sender(item):
@@ -77,8 +105,15 @@ def sender(item):
     template = f"""id: {item['id']} unico: {bool(item['unique_execute'])}\nnome: {item['nome']}\ndef horário: {item['c_minute']} {item['c_hour']} {item['c_day']} {item['c_month']} {item['c_day_week']}\ntemplate: minute hour day month day_week\nmensagem: {item['message']}"""
 
     url = f'http://localhost:8000/me/{template}'
-
     req = requests.get(url)
+
+    datee = datetime.datetime.now()
+    datee = datee.strftime('%d/%m/%Y %H:%M')
+
+    update_alarm({'id': item['id'], 'last_execute': datee})
+
+    if bool(item['unique_execute']):
+        delete_alarm(item['id'])
 
     return req.content 
 
@@ -96,7 +131,5 @@ if __name__ == '__main__':
         for i in b:
             sender(i)
         
-
-        
-        time.sleep(10)
+        time.sleep(60)
     
